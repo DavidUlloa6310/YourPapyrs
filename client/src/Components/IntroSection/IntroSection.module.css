@@ -1,0 +1,85 @@
+.IntroSection {
+  background-color: rgba(0, 0, 0, 0.83);
+  height: 100vh;
+  position: relative;
+}
+
+.IntroDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 10%;
+
+  height: 80vh;
+}
+
+.IntroWordArt {
+  width: 400px;
+  height: auto;
+}
+
+.IntroArticle h1,
+h2 {
+  color: white;
+}
+
+.IntroArticle h1 {
+  font-family: "Special Elite", sans-serif;
+  font-weight: 100;
+  font-size: 5em;
+}
+
+.IntroArticle h2 {
+  font-family: "Merriweather", serif;
+  font-size: 2em;
+}
+
+@media screen and (max-width: 1024px) {
+  .IntroDiv h1,
+  h2 {
+    text-align: center;
+  }
+}
+
+.custom-shape-divider-bottom-1634099041 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1634099041 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.custom-shape-divider-bottom-1634099041 .shape-fill {
+  fill: #ffffff;
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+  .custom-shape-divider-bottom-1634099041 svg {
+    width: calc(100% + 1.3px);
+    height: 75px;
+  }
+
+  .IntroWordArt {
+    width: 300px;
+  }
+
+  .IntroDiv h1 {
+    font-size: 3em;
+  }
+
+  .IntroDiv h2 {
+    font-size: 1.5em;
+  }
+}

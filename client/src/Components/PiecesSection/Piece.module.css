@@ -1,0 +1,30 @@
+.piece {
+  background-color: white;
+  border: 5px solid rgba(0, 0, 0, 0.83);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+
+  filter: drop-shadow(10px 5px 4px rgba(0, 0, 0, 0.5));
+}
+
+.piece h1 {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+.piece h2 {
+  font-size: 2rem;
+}
+
+.piece h1,
+.piece h2 {
+  color: rgba(0, 0, 0, 0.83);
+}
+
+.link-style {
+  text-decoration: none;
+}

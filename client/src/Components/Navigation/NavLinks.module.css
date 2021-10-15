@@ -1,0 +1,10 @@
+.link {
+  list-style: none;
+  text-decoration: none;
+  color: rgba(0, 0, 0);
+  padding: 20px;
+}
+
+.link li {
+  font-family: "Merriweather", sans-serif;
+}

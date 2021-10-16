@@ -2,6 +2,8 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
+import Piece from "./Piece";
+
 const DUMMY_DATA = {
   title: "Haiku",
   author: "David Ulloa",
@@ -15,9 +17,15 @@ function PiecePage(props) {
 
   return (
     <div>
-      {DUMMY_DATA.content.split("\n").map((str) => (
-        <p>{str}</p>
-      ))}
+      <Piece
+        title={DUMMY_DATA.title}
+        author={DUMMY_DATA.author}
+        content={DUMMY_DATA.content}
+        textStyle={{
+          textAlign: "center",
+          fontSize: "1.5em",
+        }}
+      ></Piece>
     </div>
   );
 }

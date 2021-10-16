@@ -1,0 +1,16 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.text {
+  padding: 20px;
+  font-family: "Merriweather", sans-serif;
+}
+
+.author {
+  color: black;
+}

@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 
-import styles from "./Piece.module.css";
+import styles from "./PieceCard.module.css";
 
 function Piece(props) {
   return (

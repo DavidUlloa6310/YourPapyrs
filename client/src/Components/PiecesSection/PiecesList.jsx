@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./PiecesList.module.css";
-import Piece from "./Piece";
+import PieceCard from "./PieceCard";
 
 function PiecesList(props) {
   function fetchData() {}
@@ -20,13 +20,13 @@ function PiecesList(props) {
     <div className={styles["grid"]}>
       {DATA.map((item) => {
         return (
-          <Piece
+          <PieceCard
             author={item.author}
             title={item.title}
             key={item.id}
             id={item.id}
             type={item.type}
-          ></Piece>
+          ></PieceCard>
         );
       })}
     </div>

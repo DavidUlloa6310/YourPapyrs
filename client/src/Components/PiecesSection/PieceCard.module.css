@@ -1,12 +1,15 @@
 .piece {
   background-color: white;
   border: 5px solid rgba(0, 0, 0, 0.83);
+
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   text-align: center;
+
+  width: 250px;
 
   filter: drop-shadow(10px 5px 4px rgba(0, 0, 0, 0.5));
 }

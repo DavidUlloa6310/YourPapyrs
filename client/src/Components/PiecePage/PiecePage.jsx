@@ -16,7 +16,7 @@ function PiecePage(props) {
   function fetchData() {}
 
   return (
-    <div>
+    <section>
       <Piece
         title={DUMMY_DATA.title}
         author={DUMMY_DATA.author}
@@ -26,7 +26,7 @@ function PiecePage(props) {
           fontSize: "1.5em",
         }}
       ></Piece>
-    </div>
+    </section>
   );
 }
 

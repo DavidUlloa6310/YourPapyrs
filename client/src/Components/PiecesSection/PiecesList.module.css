@@ -3,4 +3,7 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-gap: 20px;
   width: 80vw;
+
+  justify-content: center;
+  justify-items: center;
 }

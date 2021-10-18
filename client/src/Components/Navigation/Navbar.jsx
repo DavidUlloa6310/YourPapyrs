@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Backdrop from "../UI/Backdrop";
 import Drawer from "../UI/Drawer";
@@ -31,7 +31,7 @@ function Navbar(props) {
         <Link to="/" className={styles["link"]}>
           <li>My Writting</li>
         </Link>
-        <Link to="/" className={styles["link"]}>
+        <Link to="/upload" className={styles["link"]}>
           <li>Submit Writing</li>
         </Link>
         <div className={styles["burger"]} onClick={burgerStateHandler}>

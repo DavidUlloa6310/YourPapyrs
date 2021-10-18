@@ -8,7 +8,6 @@ function UploadForm(props) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 

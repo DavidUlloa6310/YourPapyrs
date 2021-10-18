@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import styles from "./NavLinks.module.css";
 
@@ -17,7 +17,7 @@ function NavLinks(props) {
       <NavLink to="/" className={styles["link"]}>
         <li>My Writting</li>
       </NavLink>
-      <NavLink to="/" className={styles["link"]}>
+      <NavLink to="/upload" className={styles["link"]}>
         <li>Submit Writing</li>
       </NavLink>
     </>

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 
 import Piece from "../Shared/Piece";
 
+import styles from "./PiecePage.module.css";
+
 const DUMMY_DATA = {
   title: "Haiku",
   author: "David Ulloa",
@@ -16,7 +18,7 @@ function PiecePage(props) {
   function fetchData() {}
 
   return (
-    <section>
+    <section className={styles["piece-section"]}>
       <Piece
         title={DUMMY_DATA.title}
         author={DUMMY_DATA.author}

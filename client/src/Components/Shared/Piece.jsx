@@ -9,7 +9,11 @@ function Piece(props) {
       <h1 className={styles["title"]}>{props.title}</h1>
       <div className={styles["text"]} style={props.textStyle}>
         {props.content.split("\n").map((str) => (
-          <p key={Math.random()} className={styles["line"]}>
+          <p
+            key={Math.random()}
+            className={styles["line"]}
+            style={props.textStyle}
+          >
             {str}
           </p>
         ))}

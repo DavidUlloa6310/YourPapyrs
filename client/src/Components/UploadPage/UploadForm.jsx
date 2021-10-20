@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import styles from "./UploadForm.module.css";
+import {
+  FaAlignCenter,
+  FaAlignJustify,
+  FaAlignLeft,
+  FaAlignRight,
+} from "react-icons/fa";
 
 import { useForm } from "react-hook-form";
+
+import styles from "./UploadForm.module.css";
 
 function UploadForm(props) {
   const {
@@ -10,6 +17,44 @@ function UploadForm(props) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [textStyles, setTextStyles] = useState({});
+
+  function alignCenterClick() {
+    setTextStyles((prevState) => {
+      return {
+        textAlign: "center",
+      };
+    });
+  }
+
+  function alignRightClick() {
+    setTextStyles((prevState) => {
+      return {
+        textAlign: "end",
+      };
+    });
+  }
+
+  function alignLeftClick() {
+    setTextStyles((prevState) => {
+      return {
+        textAlign: "start",
+      };
+    });
+  }
+
+  function alignJustifyContent() {
+    setTextStyles((prevState) => {
+      return {
+        textAlign: "justify",
+      };
+    });
+  }
+
+  useEffect(() => {
+    props.updateStyles(textStyles);
+  }, [textStyles]);
 
   return (
     <form onSubmit={handleSubmit(props.onSubmit)} className={styles["form"]}>
@@ -37,6 +82,36 @@ function UploadForm(props) {
         {errors.piece_text && (
           <p className={styles["error"]}>You must include some text</p>
         )}
+      </div>
+      <div className={styles["align-btns"]}>
+        <FaAlignJustify
+          size={30}
+          onClick={alignJustifyContent}
+          className={`${styles["icon"]} ${
+            textStyles.textAlign === "justify" && styles["selected"]
+          }`}
+        />
+        <FaAlignCenter
+          size={30}
+          onClick={alignCenterClick}
+          className={`${styles["icon"]} ${
+            textStyles.textAlign === "center" && styles["selected"]
+          }`}
+        />
+        <FaAlignLeft
+          size={30}
+          onClick={alignLeftClick}
+          className={`${styles["icon"]} ${
+            textStyles.textAlign === "start" && styles["selected"]
+          }`}
+        />
+        <FaAlignRight
+          size={30}
+          onClick={alignRightClick}
+          className={`${styles["icon"]} ${
+            textStyles.textAlign === "end" && styles["selected"]
+          }`}
+        />
       </div>
       <div className={styles["input-div"]}>
         <button className={styles["button"]} type="submit">

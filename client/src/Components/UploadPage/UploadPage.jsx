@@ -1,28 +1,20 @@
 import React, { useState } from "react";
 import Piece from "../Shared/Piece";
-import Backdrop from "../Shared/UI/Backdrop";
-import Drawer from "../Shared/UI/Drawer";
 import Card from "../Shared/UI/Card";
 
 import UploadForm from "./UploadForm";
 
 import styles from "./UploadPage.module.css";
 
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
 function UploadPage(props) {
   function submitHandler(data) {
     console.log(data);
   }
-
-  const [showDrawer, setShowDrawer] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("Anonymous");
 
-  function toggleShowDrawer() {
-    setShowDrawer((prevState) => !prevState);
-  }
+  const [textStyles, setTextStyles] = useState({});
 
   function titleHandler(event) {
     setTitle(event.target.value);
@@ -32,9 +24,10 @@ function UploadPage(props) {
     setContent(event.target.value);
   }
 
-  const drawerStyle = {
-    width: "50%",
-  };
+  function updateStyles(styleObject) {
+    setTextStyles(styleObject);
+    console.log(textStyles);
+  }
 
   return (
     <section className={styles["page"]}>
@@ -42,11 +35,17 @@ function UploadPage(props) {
         onSubmit={submitHandler}
         onTitleChange={titleHandler}
         onContentChange={contentHandler}
+        updateStyles={updateStyles}
         content={content}
         title={title}
       ></UploadForm>
       <Card className={styles["card"]}>
-        <Piece content={content} author={author} title={title}></Piece>
+        <Piece
+          content={content}
+          author={author}
+          title={title}
+          textStyle={textStyles}
+        ></Piece>
       </Card>
     </section>
   );

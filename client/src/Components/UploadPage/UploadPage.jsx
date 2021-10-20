@@ -38,30 +38,13 @@ function UploadPage(props) {
 
   return (
     <section className={styles["page"]}>
-      <FaArrowRight
-        size={30}
-        className={styles["open-arrow"]}
-        onClick={toggleShowDrawer}
-      ></FaArrowRight>
-      <Drawer
-        show={showDrawer}
-        isAbove={false}
-        className={styles["drawer"]}
-        styles={drawerStyle}
-      >
-        <UploadForm
-          onSubmit={submitHandler}
-          onTitleChange={titleHandler}
-          onContentChange={contentHandler}
-          content={content}
-          title={title}
-        ></UploadForm>
-        <FaArrowLeft
-          size={30}
-          className={styles["close-arrow"]}
-          onClick={toggleShowDrawer}
-        ></FaArrowLeft>
-      </Drawer>
+      <UploadForm
+        onSubmit={submitHandler}
+        onTitleChange={titleHandler}
+        onContentChange={contentHandler}
+        content={content}
+        title={title}
+      ></UploadForm>
       <Card className={styles["card"]}>
         <Piece content={content} author={author} title={title}></Piece>
       </Card>

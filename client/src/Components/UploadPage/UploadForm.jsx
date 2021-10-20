@@ -15,7 +15,12 @@ function UploadForm(props) {
     <form onSubmit={handleSubmit(props.onSubmit)} className={styles["form"]}>
       <div className={styles["input-div"]}>
         <label>Title</label>
-        <input type="text" {...register("title", { required: true })}></input>
+        <input
+          type="text"
+          {...register("title", { required: true })}
+          onChange={props.onTitleChange}
+          value={props.title}
+        ></input>
         {errors.title && (
           <p className={styles["error"]}>You must include a title</p>
         )}
@@ -26,6 +31,8 @@ function UploadForm(props) {
           rows={15}
           cols={40}
           {...register("piece_text", { required: true })}
+          onChange={props.onContentChange}
+          value={props.content}
         ></textarea>
         {errors.piece_text && (
           <p className={styles["error"]}>You must include some text</p>

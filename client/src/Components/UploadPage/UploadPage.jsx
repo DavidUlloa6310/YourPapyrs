@@ -1,17 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
+import Piece from "../Shared/Piece";
+import Backdrop from "../Shared/UI/Backdrop";
+import Drawer from "../Shared/UI/Drawer";
+import Card from "../Shared/UI/Card";
 
 import UploadForm from "./UploadForm";
 
 import styles from "./UploadPage.module.css";
+
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 function UploadPage(props) {
   function submitHandler(data) {
     console.log(data);
   }
 
+  const [showDrawer, setShowDrawer] = useState(true);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [author, setAuthor] = useState("Anonymous");
+
+  function toggleShowDrawer() {
+    setShowDrawer((prevState) => !prevState);
+  }
+
+  function titleHandler(event) {
+    setTitle(event.target.value);
+  }
+
+  function contentHandler(event) {
+    setContent(event.target.value);
+  }
+
+  const drawerStyle = {
+    width: "50%",
+  };
+
   return (
     <section className={styles["page"]}>
-      <UploadForm onSubmit={submitHandler}></UploadForm>
+      <FaArrowRight
+        size={30}
+        className={styles["open-arrow"]}
+        onClick={toggleShowDrawer}
+      ></FaArrowRight>
+      <Drawer
+        show={showDrawer}
+        isAbove={false}
+        className={styles["drawer"]}
+        styles={drawerStyle}
+      >
+        <UploadForm
+          onSubmit={submitHandler}
+          onTitleChange={titleHandler}
+          onContentChange={contentHandler}
+          content={content}
+          title={title}
+        ></UploadForm>
+        <FaArrowLeft
+          size={30}
+          className={styles["close-arrow"]}
+          onClick={toggleShowDrawer}
+        ></FaArrowLeft>
+      </Drawer>
+      <Card className={styles["card"]}>
+        <Piece content={content} author={author} title={title}></Piece>
+      </Card>
     </section>
   );
 }

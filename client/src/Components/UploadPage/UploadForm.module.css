@@ -26,12 +26,14 @@
   text-align: center;
 }
 
-.input-div input {
-  width: 310px;
+.input-div input,
+.input-div textarea {
+  width: 60%;
+  resize: none;
 }
 
 .button {
-  width: 200px;
+  width: 60%;
   height: 50px;
   outline: none;
   border: 2px solid black;
@@ -47,4 +49,12 @@
   color: red;
   width: 100vw;
   text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .input-div textarea,
+  .button,
+  .input-div input {
+    width: 200px;
+  }
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import Piece from "./Piece";
+import Piece from "../Shared/Piece";
 
 const DUMMY_DATA = {
   title: "Haiku",

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import Backdrop from "../UI/Backdrop";
-import Drawer from "../UI/Drawer";
+import Backdrop from "../Shared/UI/Backdrop";
+import Drawer from "../Shared//UI/Drawer";
 import NavLinks from "./NavLinks";
 
 import styles from "./Navbar.module.css";

@@ -5,6 +5,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.9);
   padding: 20px;
+  z-index: 10;
 }
 
 .navbar h1 {

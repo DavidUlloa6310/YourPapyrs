@@ -14,13 +14,24 @@ function Drawer(props) {
       mountOnEnter
       unmountOnExit
     >
-      <aside className={styles["drawer"]} onClick={props.onClick}>
+      <aside
+        className={`${styles["drawer"]} ${styles[props.className]}`}
+        onClick={props.onClick}
+        style={props.styles}
+      >
         {props.children}
       </aside>
     </CSSTransition>
   );
 
-  return ReactDOM.createPortal(content, document.getElementById("drawer-hook"));
+  if (!props.isAbove) {
+    return content;
+  }
+
+  return ReactDOM.createPortal(
+    content,
+    document.getElementById(props.hook || "drawer-hook")
+  );
 }
 
 export default Drawer;

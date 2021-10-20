@@ -12,8 +12,13 @@
   font-family: "Merriweather", sans-serif;
 }
 
+.title {
+  font-size: 48px;
+}
+
 .author {
   color: black;
+  font-size: 24px;
 }
 
 .preview-text {

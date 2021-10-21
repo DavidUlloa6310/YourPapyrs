@@ -67,3 +67,12 @@
   width: 100vw;
   text-align: center;
 }
+
+.checkbox-input {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox-input label {
+  font-size: 0.5em;
+}

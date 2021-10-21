@@ -12,7 +12,7 @@ function UploadPage(props) {
   }
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("Anonymous");
+  const [isAnon, setIsAnon] = useState(false);
 
   const [textStyles, setTextStyles] = useState({});
 
@@ -29,6 +29,10 @@ function UploadPage(props) {
     console.log(textStyles);
   }
 
+  function anonHandler(event) {
+    setIsAnon((prevState) => !prevState);
+  }
+
   return (
     <section className={styles["page"]}>
       <UploadForm
@@ -38,11 +42,12 @@ function UploadPage(props) {
         updateStyles={updateStyles}
         content={content}
         title={title}
+        toggleAnon={anonHandler}
       ></UploadForm>
       <Card className={styles["card"]}>
         <Piece
           content={content}
-          author={author}
+          author={isAnon ? "Anonymous" : "David Ulloa"}
           title={title}
           textStyle={textStyles}
         ></Piece>

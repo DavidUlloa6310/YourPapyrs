@@ -16,6 +16,10 @@
   min-height: 800px;
   width: 600px;
   text-overflow: clip;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1024px) {

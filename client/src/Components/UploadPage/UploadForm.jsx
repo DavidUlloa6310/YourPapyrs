@@ -113,6 +113,12 @@ function UploadForm(props) {
           }`}
         />
       </div>
+      <div className={`${styles["input-div"]} ${styles["checkbox-input"]}`}>
+        <label>
+          Upload Anonymously
+          <input type="checkbox" onClick={props.toggleAnon} />
+        </label>
+      </div>
       <div className={styles["input-div"]}>
         <button className={styles["button"]} type="submit">
           Submit

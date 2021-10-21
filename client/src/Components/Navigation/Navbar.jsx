@@ -28,7 +28,7 @@ function Navbar(props) {
         <Link to="/" className={styles["link"]}>
           <li>Find Writting</li>
         </Link>
-        <Link to="/" className={styles["link"]}>
+        <Link to="/users/davidulloa" className={styles["link"]}>
           <li>My Writting</li>
         </Link>
         <Link to="/upload" className={styles["link"]}>

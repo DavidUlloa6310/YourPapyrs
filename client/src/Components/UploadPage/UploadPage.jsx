@@ -26,7 +26,6 @@ function UploadPage(props) {
 
   function updateStyles(styleObject) {
     setTextStyles(styleObject);
-    console.log(textStyles);
   }
 
   function anonHandler(event) {

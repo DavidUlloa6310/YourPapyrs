@@ -4,28 +4,25 @@ import styles from "./PiecesList.module.css";
 import PieceCard from "./PieceCard";
 
 function PiecesList(props) {
-  function fetchData() {}
-
-  const DATA = [
-    { id: 0, author: "David", title: "The Raven", type: "Poem" },
-    { id: 1, author: "David", title: "The Raven", type: "Poem" },
-    { id: 2, author: "David", title: "The Raven", type: "Poem" },
-    { id: 3, author: "David", title: "The Raven", type: "Poem" },
-    { id: 4, author: "David", title: "The Raven", type: "Poem" },
-    { id: 5, author: "David", title: "The Raven", type: "Poem" },
-    { id: 6, author: "David", title: "The Raven", type: "Poem" },
-  ];
+  if (!props.data || props.data.length === 0) {
+    return (
+      <div className={styles["warning"]}>
+        <h1> No Pieces Found </h1>
+        <button className={styles["button"]}>Submit A Piece</button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles["grid"]}>
-      {DATA.map((item) => {
+      {props.data.map((item) => {
         return (
           <PieceCard
             author={item.author}
             title={item.title}
-            key={item.id}
-            id={item.id}
-            type={item.type}
+            key={item._id}
+            id={item._id}
+            type={"Poem"}
           ></PieceCard>
         );
       })}

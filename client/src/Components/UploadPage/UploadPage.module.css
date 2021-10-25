@@ -27,3 +27,17 @@
     width: 400px;
   }
 }
+
+.button {
+  width: 200px;
+  height: 50px;
+  outline: none;
+  border: 2px solid black;
+  background: none;
+  font-family: "Merriweather", sans-serif;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}

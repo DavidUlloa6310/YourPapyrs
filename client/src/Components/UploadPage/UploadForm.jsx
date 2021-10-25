@@ -120,7 +120,11 @@ function UploadForm(props) {
         </label>
       </div>
       <div className={styles["input-div"]}>
-        <button className={styles["button"]} type="submit">
+        <button
+          className={styles["button"]}
+          type="submit"
+          onClick={props.onButtonClick}
+        >
           Submit
         </button>
       </div>

@@ -39,7 +39,6 @@ function PiecePage(props) {
         content={piece.text}
         textStyle={{
           textAlign: "center",
-          fontSize: "1.5em",
         }}
       ></Piece>
     </section>

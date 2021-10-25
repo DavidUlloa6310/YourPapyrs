@@ -18,20 +18,24 @@ function UploadPage(props) {
   const [textStyles, setTextStyles] = useState({});
 
   async function submitHandler(data) {
-    const response = await fetch("http://localhost:5000/api/v1/pieces", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title,
-        text: content,
-        author: isAnon ? "Anonymous" : "David Ulloa",
-      }),
-    });
-    if (response.ok) {
-      setShowModal(true);
-    } else {
+    try {
+      const response = await fetch("http://localhost:5000/api/v1/pieces", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          text: content,
+          author: isAnon ? "Anonymous" : "David Ulloa",
+        }),
+      });
+      if (response.ok) {
+        setShowModal(true);
+      } else {
+        setShowError(true);
+      }
+    } catch (err) {
       setShowError(true);
     }
   }
@@ -89,7 +93,12 @@ function UploadPage(props) {
       )}
 
       {showError && (
-        <h2 className={styles["red"]}>Error: Piece Not Submitted</h2>
+        <Modal onClick={toggleError}>
+          <h2 style={{ color: "red" }}>Error: Piece Not Submitted</h2>
+          <button className={styles["button_error"]} onClick={toggleError}>
+            Okay
+          </button>
+        </Modal>
       )}
     </section>
   );

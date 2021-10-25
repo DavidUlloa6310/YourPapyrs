@@ -43,6 +43,16 @@
   cursor: pointer;
 }
 
+.button-error {
+  width: 200px;
+  height: 50px;
+  outline: none;
+  border: 2px solid red;
+  background: none;
+  font-family: "Merriweather", sans-serif;
+  cursor: pointer;
+}
+
 .align-btns {
   display: flex;
   flex-direction: row;

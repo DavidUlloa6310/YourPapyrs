@@ -11,7 +11,9 @@ function Piece(props) {
         {props.content.split("\n").map((str) => (
           <p
             key={Math.random()}
-            className={styles["line"]}
+            className={`${styles["line"]} ${
+              props.content.length > 400 && styles["small-text"]
+            }`}
             style={props.textStyle}
           >
             {str}

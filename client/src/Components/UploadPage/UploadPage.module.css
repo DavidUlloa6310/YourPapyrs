@@ -32,7 +32,19 @@
   width: 200px;
   height: 50px;
   outline: none;
+  margin: 20px;
   border: 2px solid black;
+  background: none;
+  font-family: "Merriweather", sans-serif;
+  cursor: pointer;
+}
+
+.button_error {
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+  outline: none;
+  border: 2px solid red;
   background: none;
   font-family: "Merriweather", sans-serif;
   cursor: pointer;

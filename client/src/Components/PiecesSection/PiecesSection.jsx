@@ -8,19 +8,29 @@ function PiecesSection(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/pieces")
-      .then((resposne) => resposne.json())
-      .then((data) => {
-        setPiecesData(data.data.piece);
-        return data;
-      })
-      .finally(setLoading(false));
+    async function getData() {
+      try {
+        const response = await fetch("http://localhost:5000/api/v1/pieces");
+        const data = await response.json();
+        if (response.ok) {
+          console.log(data);
+          setPiecesData(data.data.piece);
+          setLoading(false);
+        } else {
+          throw Error("Could not fetch Data");
+        }
+      } catch (err) {
+        return <h1 className={styles["error"]}>Error</h1>;
+      }
+    }
+    getData();
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    <section className={styles["piece-section"]}>
+      <h1>Loading...</h1>
+    </section>;
   }
-
   return (
     <section className={styles["piecesSection"]}>
       <h1 className={styles["piecesTitle"]}>Pieces</h1>

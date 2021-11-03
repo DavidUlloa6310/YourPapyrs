@@ -12,7 +12,7 @@ function PiecePage(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/pieces/${id}`)
+    fetch(`https://calm-plains-43987.herokuapp.com/api/v1/pieces/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setPiece(data.data.piece);

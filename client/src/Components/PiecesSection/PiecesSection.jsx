@@ -10,7 +10,9 @@ function PiecesSection(props) {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch("http://localhost:5000/api/v1/pieces");
+        const response = await fetch(
+          "https://calm-plains-43987.herokuapp.com/api/v1/pieces"
+        );
         const data = await response.json();
         if (response.ok) {
           console.log(data);

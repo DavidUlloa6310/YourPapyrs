@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import styles from "./PiecesList.module.css";
 import PieceCard from "./PieceCard";
 
@@ -8,7 +10,9 @@ function PiecesList(props) {
     return (
       <div className={styles["warning"]}>
         <h1> No Pieces Found </h1>
-        <button className={styles["button"]}>Submit A Piece</button>
+        <Link to="/upload">
+          <button className={styles["button"]}>Submit A Piece</button>
+        </Link>
       </div>
     );
   }
@@ -22,7 +26,7 @@ function PiecesList(props) {
             title={item.title}
             key={item._id}
             id={item._id}
-            type={"Poem"}
+            // type={"Poem"}
           ></PieceCard>
         );
       })}

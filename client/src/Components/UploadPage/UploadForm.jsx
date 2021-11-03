@@ -83,6 +83,20 @@ function UploadForm(props) {
           <p className={styles["error"]}>You must include some text</p>
         )}
       </div>
+
+      <div className={styles["input-div"]}>
+        <label>Name of Author</label>
+        <input
+          type="text"
+          {...register("author")}
+          onChange={props.onAuthorChange}
+          value={props.author}
+        ></input>
+        {errors.title && (
+          <p className={styles["error"]}>You must include a title</p>
+        )}
+      </div>
+
       <div className={styles["align-btns"]}>
         <FaAlignJustify
           size={30}

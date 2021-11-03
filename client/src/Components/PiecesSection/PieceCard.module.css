@@ -31,3 +31,20 @@
 .link-style {
   text-decoration: none;
 }
+
+.heart-button {
+  outline: none;
+  border: none;
+  border-radius: 100px;
+  padding: 5px;
+  padding-bottom: 1px;
+  background-color: white;
+
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.selected-icon {
+  color: red;
+}

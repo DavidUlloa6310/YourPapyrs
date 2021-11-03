@@ -17,12 +17,6 @@ function Piece(props) {
         {/* {props.id} */}
         <h2>{props.type}</h2>
       </Link>
-      <button className={styles["heart-button"]}>
-        <FaHeart
-          className={`${styles["heart-icon"]} ${styles["selected-icon"]}`}
-          size={30}
-        ></FaHeart>
-      </button>
     </Card>
   );
 }

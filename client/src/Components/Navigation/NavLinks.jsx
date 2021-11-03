@@ -19,17 +19,9 @@ function NavLinks(props) {
         <li>Find Writting</li>
       </NavLink>
 
-      {auth.isLoggedIn && (
-        <NavLink to="/" className={styles["link"]}>
-          <li>My Writting</li>
-        </NavLink>
-      )}
-
-      {auth.isLoggedIn && (
-        <NavLink to="/upload" className={styles["link"]}>
-          <li>Submit Writing</li>
-        </NavLink>
-      )}
+      <NavLink to="/upload" className={styles["link"]}>
+        <li>Submit Writing</li>
+      </NavLink>
     </>
   );
 }

@@ -33,22 +33,10 @@ function Navbar(props) {
           <li>Find Writting</li>
         </Link>
 
-        {!auth.isLoggedIn && (
-          <Link to="/login" className={styles["link"]}>
-            <li>Login</li>
-          </Link>
-        )}
+        <Link to="/upload" className={styles["link"]}>
+          <li>Submit Writing</li>
+        </Link>
 
-        {auth.isLoggedIn && (
-          <Link to="/users/davidulloa" className={styles["link"]}>
-            <li>My Writting</li>
-          </Link>
-        )}
-        {auth.isLoggedIn && (
-          <Link to="/upload" className={styles["link"]}>
-            <li>Submit Writing</li>
-          </Link>
-        )}
         <div className={styles["burger"]} onClick={burgerStateHandler}>
           <span className={styles["line"]}></span>
           <span className={styles["line"]}></span>

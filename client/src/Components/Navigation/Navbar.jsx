@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -8,12 +8,16 @@ import NavLinks from "./NavLinks";
 
 import styles from "./Navbar.module.css";
 
+import { AuthContext } from "../Shared/context/auth-context";
+
 function Navbar(props) {
   const [burgerState, setBurgerState] = useState(false);
 
   function burgerStateHandler() {
     setBurgerState((prevState) => !prevState);
   }
+
+  const auth = useContext(AuthContext);
 
   return (
     <nav className={styles.navbar}>
@@ -28,12 +32,23 @@ function Navbar(props) {
         <Link to="/" className={styles["link"]}>
           <li>Find Writting</li>
         </Link>
-        <Link to="/users/davidulloa" className={styles["link"]}>
-          <li>My Writting</li>
-        </Link>
-        <Link to="/upload" className={styles["link"]}>
-          <li>Submit Writing</li>
-        </Link>
+
+        {!auth.isLoggedIn && (
+          <Link to="/login" className={styles["link"]}>
+            <li>Login</li>
+          </Link>
+        )}
+
+        {auth.isLoggedIn && (
+          <Link to="/users/davidulloa" className={styles["link"]}>
+            <li>My Writting</li>
+          </Link>
+        )}
+        {auth.isLoggedIn && (
+          <Link to="/upload" className={styles["link"]}>
+            <li>Submit Writing</li>
+          </Link>
+        )}
         <div className={styles["burger"]} onClick={burgerStateHandler}>
           <span className={styles["line"]}></span>
           <span className={styles["line"]}></span>

@@ -26,7 +26,7 @@ function Navbar(props) {
       </Drawer>
       {burgerState && <Backdrop onClick={burgerStateHandler}></Backdrop>}
       <Link to="/" className={styles["link"]}>
-        <h1>P&S</h1>
+        <h1>Your Papyrs</h1>
       </Link>
       <ul>
         <Link to="/" className={styles["link"]}>

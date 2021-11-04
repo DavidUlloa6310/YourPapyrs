@@ -12,7 +12,7 @@ function NavLinks(props) {
   return (
     <>
       <NavLink to="/" className={`${styles["link"]}`}>
-        <h1 style={{ color: "black" }}>P&S</h1>
+        <h1 style={{ color: "black" }}>Your Papyrs</h1>
       </NavLink>
 
       <NavLink to="/" className={styles["link"]}>

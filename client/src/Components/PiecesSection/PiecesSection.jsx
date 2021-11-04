@@ -11,7 +11,6 @@ function PiecesSection(props) {
     async function getData() {
       try {
         let apiURL;
-
         if (process.env.REACT_APP_DEVELOPMENT) {
           apiURL = "http://localhost:5000/api/v1/pieces";
         } else {

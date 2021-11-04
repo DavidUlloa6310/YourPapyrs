@@ -9,8 +9,8 @@ function IntroSection(props) {
     <section className={styles.IntroSection}>
       <div className={styles["IntroDiv"]}>
         <article className={styles["IntroArticle"]}>
-          <h1>Poems and Stories</h1>
-          <h2>Your stories Your poems. Upload your writing.</h2>
+          <h1>Your Papyrs</h1>
+          <h2>Your stories, Your poems. Upload your writing.</h2>
         </article>
         <img className={styles["IntroWordArt"]} src={wordArt} alt="Book"></img>
       </div>

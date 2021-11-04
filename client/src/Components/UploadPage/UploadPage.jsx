@@ -20,20 +20,24 @@ function UploadPage(props) {
 
   async function submitHandler(data) {
     try {
-      const response = await fetch(
-        `https://calm-plains-43987.herokuapp.com/api/v1/pieces`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: title,
-            text: content,
-            author: isAnon || author === "" ? "Anonymous" : author,
-          }),
-        }
-      );
+      let apiURL;
+      if (process.env.REACT_APP_DEVELOPMENT) {
+        apiURL = "http://localhost:5000/api/v1/pieces";
+      } else {
+        apiURL = `${window.location.href}api/v1/pieces`;
+      }
+
+      const response = await fetch(apiURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          text: content,
+          author: isAnon || author === "" ? "Anonymous" : author,
+        }),
+      });
       setShowModal(true);
     } catch (err) {
       setShowError(true);

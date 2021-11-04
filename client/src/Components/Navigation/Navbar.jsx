@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -8,16 +8,12 @@ import NavLinks from "./NavLinks";
 
 import styles from "./Navbar.module.css";
 
-import { AuthContext } from "../Shared/context/auth-context";
-
 function Navbar(props) {
   const [burgerState, setBurgerState] = useState(false);
 
   function burgerStateHandler() {
     setBurgerState((prevState) => !prevState);
   }
-
-  const auth = useContext(AuthContext);
 
   return (
     <nav className={styles.navbar}>

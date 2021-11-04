@@ -24,7 +24,7 @@ function UploadPage(props) {
       if (process.env.REACT_APP_DEVELOPMENT) {
         apiURL = "http://localhost:5000/api/v1/pieces";
       } else {
-        apiURL = `${window.location.href}api/v1/pieces`;
+        apiURL = `https://www.yourpapyrs.com/api/v1/pieces`;
       }
 
       const response = await fetch(apiURL, {
@@ -38,7 +38,11 @@ function UploadPage(props) {
           author: isAnon || author === "" ? "Anonymous" : author,
         }),
       });
-      setShowModal(true);
+      if (response.ok) {
+        setShowModal(true);
+      } else {
+        setShowError(true);
+      }
     } catch (err) {
       setShowError(true);
     }

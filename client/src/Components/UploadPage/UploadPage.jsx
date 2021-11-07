@@ -16,9 +16,12 @@ function UploadPage(props) {
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const [textStyles, setTextStyles] = useState({});
 
   async function submitHandler(data) {
+    setLoading(true);
     try {
       let apiURL;
       if (process.env.REACT_APP_DEVELOPMENT) {
@@ -38,14 +41,16 @@ function UploadPage(props) {
           author: isAnon || author === "" ? "Anonymous" : author,
         }),
       });
-      if (response.ok) {
-        setShowModal(true);
-      } else {
-        setShowError(true);
-      }
+      setShowModal(true);
+      setTitle("");
+      setAuthor("");
+      setContent("");
+      setIsAnon(false);
     } catch (err) {
       setShowError(true);
     }
+
+    setLoading(false);
   }
 
   function toggleModal() {
@@ -74,6 +79,14 @@ function UploadPage(props) {
 
   function anonHandler(event) {
     setIsAnon((prevState) => !prevState);
+  }
+
+  if (loading) {
+    return (
+      <section className={styles["page"]}>
+        <h1>Loading...</h1>
+      </section>
+    );
   }
 
   return (

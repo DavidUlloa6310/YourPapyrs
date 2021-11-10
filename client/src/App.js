@@ -5,6 +5,7 @@ import PiecePage from "./Components/PiecePage/PiecePage.jsx";
 import UploadPage from "./Components/UploadPage/UploadPage.jsx";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AboutSection from "./Components/AboutSection/AboutSection.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Route>
           <Route path="/" exact>
             <IntroSection />
+            <AboutSection></AboutSection>
             <PiecesSection />
           </Route>
         </Switch>

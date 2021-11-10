@@ -27,7 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const piecesRoutes = require("./routes/pieces");
+const piecesRoutes = require("./routes/pieces-routes");
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
   console.log("Connected");

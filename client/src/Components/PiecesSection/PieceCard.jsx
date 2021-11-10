@@ -8,7 +8,7 @@ import styles from "./PieceCard.module.css";
 
 function Piece(props) {
   return (
-    <Card className={styles["piece"]}>
+    <Card className={`${styles["piece"]} ${props.className}`}>
       <Link to={`piece/${props.id}`} className={styles["link-style"]}>
         <div>
           <h1 className={styles["title"]}>{props.title} </h1>

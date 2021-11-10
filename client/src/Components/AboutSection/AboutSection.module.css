@@ -1,0 +1,38 @@
+.about-section {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.reading-image {
+  height: auto;
+  width: 200px;
+}
+
+.text h2 {
+  color: black;
+}
+
+.text {
+  padding: 20px;
+  text-align: center;
+}
+
+.main-card {
+  margin: auto;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .congress-image {
+    height: 200px;
+  }
+
+  .text {
+    align-items: center;
+  }
+}

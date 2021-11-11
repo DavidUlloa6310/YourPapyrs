@@ -22,7 +22,7 @@ function AboutSection(props) {
           ranging from comedy meant to make you laugh to deep, personal, and
           pensive pieces.
           <br /> Our goal is to simply allow for the share of content - if needs
-          to be anonmyously, for the rest of the world can enjoy.
+          be anonmyously, for the rest of the world can enjoy.
           <br /> Here's a piece very near and dear to my heart. It details an
           ugly part of my life that I got out of by the means of love, time, and
           hope.

@@ -1,7 +1,8 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
+const cors = require("cors");
+const helmet = require("helmet");
 
 require("dotenv").config();
 
@@ -9,23 +10,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+app.use(cors());
 
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-
-  // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-
-  next();
-});
+app.use(helmet());
 
 const piecesRoutes = require("./routes/pieces-routes");
 

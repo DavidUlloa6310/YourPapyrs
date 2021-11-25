@@ -1,37 +1,14 @@
-const bodyParser = require("body-parser");
-const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
+
+const app = require("./app");
 
 require("dotenv").config();
-
-const app = express();
-
-app.use(express.json());
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-
-  // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-
-  next();
-});
-
-const piecesRoutes = require("./routes/pieces-routes");
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
   console.log("Connected");
 });
+
+const piecesRoutes = require("./routes/pieces-routes");
 
 app.use("/api/v1/pieces", piecesRoutes);
 

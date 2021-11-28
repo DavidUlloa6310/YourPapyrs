@@ -1,26 +1,26 @@
-const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-// const helmet = require("helmet");
+const connectDB = require("./config/db.js");
 
 require("dotenv").config();
 
 const app = express();
 
+//Connect to DataBase
+connectDB();
+
 app.use(express.json());
 
 app.use(cors());
 
-// app.use(helmet());
+//Load Routes
+const piecesRouter = require("./routes/pieces-routes.js");
+const authRouter = require("./routes/auth-routes.js");
 
-const piecesRoutes = require("./routes/pieces-routes");
-
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
-  console.log("Connected");
-});
-
-app.use("/api/v1/pieces", piecesRoutes);
+//Use Routes
+app.use("/api/v1/pieces", piecesRouter);
+app.use("/api/v1/", authRouter);
 
 if (process.env.NODE_ENV === "production") {
   //SET STATIC FOLDER

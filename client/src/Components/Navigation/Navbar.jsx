@@ -33,6 +33,10 @@ function Navbar(props) {
           <li>Submit Writing</li>
         </Link>
 
+        <Link to="/signup" className={styles["link"]}>
+          <button className={styles["button"]}>Signup</button>
+        </Link>
+
         <div className={styles["burger"]} onClick={burgerStateHandler}>
           <span className={styles["line"]}></span>
           <span className={styles["line"]}></span>

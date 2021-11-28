@@ -18,6 +18,8 @@
 .navbar ul {
   list-style: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar ul li {
@@ -41,6 +43,17 @@
   min-width: 30px;
   margin: 2px;
   background-color: white;
+}
+
+.button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Merriweather";
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {

@@ -1,3 +1,5 @@
+const Piece = require("../models/pieces-model");
+
 exports.getPieces = async (req, res) => {
   try {
     const piece = await Piece.find();
@@ -10,7 +12,7 @@ exports.getPieces = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "fail",
-      message: err,
+      message: `${err}`,
     });
   }
 };

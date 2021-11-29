@@ -1,22 +1,21 @@
 const mongoose = require("mongoose");
 
-const pieceSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const pieceSchema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
   },
-  text: {
-    type: String,
-    required: true,
-  },
-  author: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timeStamp: true }
+);
 
 module.exports = mongoose.model("pieces", pieceSchema);

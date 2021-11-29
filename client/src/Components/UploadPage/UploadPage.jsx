@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Piece from "../Shared/Piece";
 import Card from "../Shared/UI/Card";
 import Modal from "../Shared/UI/Modal";
@@ -25,22 +26,29 @@ function UploadPage(props) {
     try {
       let apiURL;
       if (process.env.REACT_APP_DEVELOPMENT) {
-        apiURL = "http://localhost:5000/api/v1/pieces";
+        apiURL = `${process.env.REACT_APP_LOCALHOST_URL}/api/v1/pieces`;
       } else {
-        apiURL = `https://www.yourpapyrs.com/api/v1/pieces`;
+        apiURL = `${process.env.REACT_APP_PRODUCTION_URL}/api/v1/pieces`;
       }
 
-      const response = await fetch(apiURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: title,
-          text: content,
-          author: isAnon || author === "" ? "Anonymous" : author,
-        }),
+      // const response = await fetch(apiURL, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     title: title,
+      //     text: content,
+      //     author: isAnon || author === "" ? "Anonymous" : author,
+      //   }),
+      // });
+
+      axios.post(apiURL, {
+        title,
+        text: content,
+        author: isAnon || author === "" ? "Anonymous" : author,
       });
+
       setShowModal(true);
       setTitle("");
       setAuthor("");

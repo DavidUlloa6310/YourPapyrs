@@ -24,7 +24,11 @@ function SignupForm(props) {
 
       <div className={styles["input-div"]}>
         <label>Password</label>
-        <input type="password"></input>
+        <input
+          type="password"
+          onChange={props.onPasswordOneChange}
+          value={props.passwordOne}
+        ></input>
       </div>
 
       <div className={styles["input-div"]}>

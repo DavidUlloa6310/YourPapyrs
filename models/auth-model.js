@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
-const { timeStamp } = require("console");
-
-const userSchema = mongoose.Schema(
+// user schema
+const userScheama = new mongoose.Schema(
   {
     email: {
       type: String,
@@ -18,26 +17,28 @@ const userSchema = mongoose.Schema(
     },
     hashed_password: {
       type: String,
-      trim: true,
       required: true,
     },
     salt: String,
     role: {
       type: String,
-      default: "Normal",
+      default: "subscriber",
     },
     resetPasswordLink: {
       data: String,
       default: "",
     },
   },
-  { timeStamp: true }
+  {
+    timestamps: true,
+  }
 );
 
-userSchema
+// virtual
+userScheama
   .virtual("password")
   .set(function (password) {
-    this.password = password;
+    this._password = password;
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
@@ -45,11 +46,12 @@ userSchema
     return this._password;
   });
 
-userSchema.methods = {
-  //Generate Salt
-  makeSalt: function () {
-    return Math.round(new Date().valueOf() * Math.random()) + "";
+// methods
+userScheama.methods = {
+  authenticate: function (plainText) {
+    return this.encryptPassword(plainText) === this.hashed_password;
   },
+
   encryptPassword: function (password) {
     if (!password) return "";
     try {
@@ -61,10 +63,10 @@ userSchema.methods = {
       return "";
     }
   },
-  //Compare password between plain get frmo user and hashe
-  authenticate: function (plainPassword) {
-    return this.encryptPassword(plainPassword) === this.hashed_password;
+
+  makeSalt: function () {
+    return Math.round(new Date().valueOf() * Math.random()) + "";
   },
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userScheama);

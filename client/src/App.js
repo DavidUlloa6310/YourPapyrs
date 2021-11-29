@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AboutSection from "./Components/AboutSection/AboutSection.jsx";
 
 import { injectStyle } from "react-toastify/dist/inject-style";
+import ActivatePage from "./Components/ActivatePage/ActivatePage.jsx";
 
 function App() {
   injectStyle();
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/signup" exact>
             <SignupPage></SignupPage>
+          </Route>
+          <Route path="/users/activate/:urlToken" exact>
+            <ActivatePage></ActivatePage>
           </Route>
           <Route path="/" exact>
             <IntroSection />

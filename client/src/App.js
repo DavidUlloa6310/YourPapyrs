@@ -4,6 +4,7 @@ import PiecesSection from "./Components/PiecesSection/PiecesSection.jsx";
 import PiecePage from "./Components/PiecePage/PiecePage.jsx";
 import UploadPage from "./Components/UploadPage/UploadPage.jsx";
 import SignupPage from "./Components/SignupPage/SignupPage.jsx";
+import LoginPage from "./Components/LoginPage/LoginPage.jsx";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AboutSection from "./Components/AboutSection/AboutSection.jsx";
@@ -28,9 +29,14 @@ function App() {
           <Route path="/signup" exact>
             <SignupPage></SignupPage>
           </Route>
+          <Route path="/login" exact>
+            <LoginPage></LoginPage>
+          </Route>
+
           <Route path="/users/activate/:urlToken" exact>
             <ActivatePage></ActivatePage>
           </Route>
+
           <Route path="/" exact>
             <IntroSection />
             <AboutSection></AboutSection>

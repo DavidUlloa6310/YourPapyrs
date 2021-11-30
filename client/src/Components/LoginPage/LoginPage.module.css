@@ -3,7 +3,7 @@
   font-size: 2.5em;
 }
 
-.signup-section {
+.login-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +22,7 @@
 }
 
 .horizontal-rule {
-  height: 5px;
+  height: 3px;
   width: 80%;
   border: none;
   background-color: black;

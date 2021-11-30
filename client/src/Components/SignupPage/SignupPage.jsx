@@ -73,7 +73,9 @@ function SignupPage(props) {
   return (
     <section className={styles["signup-section"]}>
       {isAuth() ? <Redirect to="/"></Redirect> : null}
-      <Card style={{ filter: "drop-shadow(0px 5px 5px black)" }}>
+      <Card className={styles["card"]}>
+        <h1 className={styles["title"]}>Your Papyrs</h1>
+        <hr className={styles["horizontal-rule"]} />
         <SignupForm
           onSubmit={submitHandler}
           name={name}

@@ -54,14 +54,32 @@
   border-radius: 20px;
   border: none;
   cursor: pointer;
+  margin: 10px;
 }
 
-@media (max-width: 767px) {
+.light-button {
+  background-color: white;
+  border: 1px solid black;
+  width: 150px;
+}
+
+.dark-button {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.83);
+  border: 1px solid white;
+  width: 150px;
+}
+
+@media (max-width: 1024px) {
   .burger {
     display: flex;
   }
 
   .navbar ul li {
+    display: none;
+  }
+
+  .button {
     display: none;
   }
 }

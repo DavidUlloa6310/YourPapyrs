@@ -1,18 +1,20 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ActivateForm from "./ActivateForm";
-import { isAuth } from "../../helpers/auth";
 import { Redirect, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { getLink } from "../../helpers/link";
 
 import styles from "./ActivatePage.module.css";
+import { AuthContext } from "../../helpers/AuthContext";
 
 function ActivatePage(props) {
   const [name, setName] = useState("");
   const [show, setShow] = useState(true);
   const [showError, setShowError] = useState("");
+  const { auth, setAuth } = useContext(AuthContext);
 
   let rawToken = useParams().urlToken;
 
@@ -33,15 +35,9 @@ function ActivatePage(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let apiURL;
-    if (process.env.REACT_APP_DEVELOPMENT) {
-      apiURL = `${process.env.REACT_APP_LOCALHOST_URL}`;
-    } else {
-      apiURL = `${process.env.REACT_APP_PRODUCTION_URL}`;
-    }
 
     axios
-      .post(`${apiURL}/api/v1/activation`, {
+      .post(`${getLink()}/activation`, {
         token: rawToken,
       })
       .then((res) => {
@@ -57,7 +53,7 @@ function ActivatePage(props) {
     <section className={styles["activate-section"]}>
       <ToastContainer></ToastContainer>
       <h1 style={{ textAlign: "center" }}>Welcome {name}</h1>
-      {isAuth() ? <Redirect to="/"></Redirect> : null}
+      {auth ? <Redirect to="/"></Redirect> : null}
       <div className={styles["activate-container"]}>
         <ActivateForm handleSubmit={handleSubmit}></ActivateForm>
         <hr className={styles["line"]}></hr>

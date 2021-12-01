@@ -1,0 +1,12 @@
+.signout-section {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  padding: 20px;
+}

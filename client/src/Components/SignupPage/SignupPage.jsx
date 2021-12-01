@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Card from "../Shared/UI/Card";
 import SignupForm from "./SignupForm";
-import { isAuth } from "../../helpers/auth";
+import { getLink } from "../../helpers/link";
 
 import { ToastContainer, toast } from "react-toastify";
 
 import styles from "./SignUpPage.module.css";
 import axios from "axios";
+import { AuthContext } from "../../helpers/AuthContext";
 function SignupPage(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
+  const { auth, setAuth } = useContext(AuthContext);
 
   function nameHandler(event) {
     setName(event.target.value);
@@ -45,15 +47,8 @@ function SignupPage(props) {
       return toast.error("Passwords must match.");
     }
 
-    let apiURL;
-    if (process.env.REACT_APP_DEVELOPMENT) {
-      apiURL = `${process.env.REACT_APP_LOCALHOST_URL}/api/v1/register`;
-    } else {
-      apiURL = `${process.env.REACT_APP_PRODUCTION_URL}/api/v1/register`;
-    }
-
     axios
-      .post(apiURL, {
+      .post(getLink() + "/register", {
         name,
         email,
         password: passwordOne,
@@ -72,7 +67,7 @@ function SignupPage(props) {
 
   return (
     <section className={styles["signup-section"]}>
-      {isAuth() ? <Redirect to="/"></Redirect> : null}
+      {auth ? <Redirect to="/"></Redirect> : null}
       <Card className={styles["card"]}>
         <h1 className={styles["title"]}>Your Papyrs</h1>
         <hr className={styles["horizontal-rule"]} />

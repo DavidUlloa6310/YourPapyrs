@@ -18,10 +18,12 @@ app.use(cors());
 //Load Routes
 const piecesRouter = require("./routes/pieces-routes.js");
 const authRouter = require("./routes/auth-routes.js");
+const userRouter = require("./routes/user-routes");
 
 //Use Routes
 app.use("/api/v1/pieces", piecesRouter);
 app.use("/api/v1/", authRouter);
+app.use("/api/v1/users", userRouter);
 
 if (process.env.NODE_ENV === "production") {
   //SET STATIC FOLDER

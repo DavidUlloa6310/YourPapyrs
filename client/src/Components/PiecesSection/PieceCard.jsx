@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
 
 import Card from "../Shared/UI/Card";
 

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
@@ -7,7 +8,7 @@ import { getLink } from "../../helpers/link";
 
 import Piece from "../Shared/Piece";
 
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaTrashAlt } from "react-icons/fa";
 
 import styles from "./PiecePage.module.css";
 
@@ -17,6 +18,11 @@ function PiecePage(props) {
   const [loading, setLoading] = useState(true);
 
   const { auth, setAuth } = useContext(AuthContext);
+
+  const headers = {
+    "content-type": "application/json",
+    token: auth.token,
+  };
 
   function findIsLiked() {
     let found = false;
@@ -35,10 +41,29 @@ function PiecePage(props) {
     }
   }
 
+  function canDelete() {
+    if (!auth) {
+      return false;
+    }
+
+    if (!piece) {
+      return false;
+    }
+
+    if (auth.user.role === "admin") {
+      return true;
+    }
+
+    return piece.authorId === auth.user._id;
+  }
+
   const [isLiked, setIsLiked] = useState(findIsLiked());
+  const [redirect, setRedirect] = useState();
 
   useEffect(() => {
-    fetch(`${getLink()}/pieces/${id}`)
+    fetch(`${getLink()}/pieces/${id}`, {
+      headers: headers,
+    })
       .then((response) => response.json())
       .then((data) => {
         setPiece(data.data.piece);
@@ -47,6 +72,9 @@ function PiecePage(props) {
       .finally(() => {
         setLoading(false);
       });
+    // console.log(
+    //   (auth && auth.user.role === "admin") || piece.autherId === auth.user._id
+    // );
   }, []);
 
   function likeHandler() {
@@ -60,11 +88,32 @@ function PiecePage(props) {
       setIsLiked(true);
       auth.user.likedPieces.push(id);
     }
+    axios.patch(
+      getLink() + `/users/${auth.user._id}`,
+      {
+        user: auth.user,
+      },
+      {
+        headers: {
+          token: process.env.REACT_APP_JWT_ADMIN_TOKEN,
+        },
+      }
+    );
+  }
 
-    console.log(auth.user._id);
-    axios.patch(getLink() + `/users/${auth.user._id}`, {
-      user: auth.user,
-    });
+  async function deletePiece() {
+    if (window.confirm("Are you sure you want to delete this piece?")) {
+      try {
+        await fetch(`${getLink()}/pieces/${id}`, {
+          method: "DELETE",
+          headers: headers,
+        });
+
+        setRedirect(true);
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
   }
 
   if (loading) {
@@ -73,6 +122,10 @@ function PiecePage(props) {
         <h1>Loading</h1>
       </section>
     );
+  }
+
+  if (redirect) {
+    return <Redirect to="/"></Redirect>;
   }
 
   return (
@@ -86,17 +139,24 @@ function PiecePage(props) {
         }}
       ></Piece>
 
-      {auth && (
-        <FaHeart
-          size={30}
-          onClick={likeHandler}
-          className={isLiked ? styles["liked"] : styles["not-liked"]}
-        ></FaHeart>
-      )}
-      {/* {auth && (
-        <div className={styles["toolbar"]}>
-        </div>
-      )} */}
+      <div className={styles["icons"]}>
+        {auth !== null && (
+          <FaHeart
+            size={30}
+            onClick={likeHandler}
+            className={`${isLiked ? styles["liked"] : styles["not-liked"]} ${
+              styles["icon"]
+            }`}
+          ></FaHeart>
+        )}
+        {canDelete() && (
+          <FaTrashAlt
+            size={30}
+            className={styles["icon"]}
+            onClick={deletePiece}
+          ></FaTrashAlt>
+        )}
+      </div>
     </section>
   );
 }

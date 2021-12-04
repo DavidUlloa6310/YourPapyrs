@@ -14,6 +14,10 @@ const pieceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
   },
   { timeStamp: true }
 );

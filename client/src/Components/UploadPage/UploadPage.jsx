@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Piece from "../Shared/Piece";
 import Card from "../Shared/UI/Card";
@@ -9,7 +9,7 @@ import { Redirect } from "react-router";
 
 import styles from "./UploadPage.module.css";
 import { toast, ToastContainer } from "react-toastify";
-import { auth, IAMAuth } from "google-auth-library";
+import { AuthContext } from "../../helpers/AuthContext";
 
 function UploadPage(props) {
   const [title, setTitle] = useState("");
@@ -23,21 +23,36 @@ function UploadPage(props) {
 
   const [textStyles, setTextStyles] = useState({});
 
+  const { auth, setAuth } = useContext(AuthContext);
+
   async function submitHandler(event) {
     event.preventDefault();
-    setLoading(true);
 
     if (!title || !content) {
-      return toast.error("You include the text of your piece and its title.");
+      return toast.error(
+        "You must include the text of your piece and its title."
+      );
     }
 
     try {
-      axios.post(getLink() + "/pieces", {
-        title,
-        text: content,
-        author: isAnon ? "Anonymous" : auth.user.name,
-      });
-
+      setLoading(true);
+      await axios.post(
+        getLink() + "/pieces",
+        {
+          userId: auth.user._id,
+          piece: {
+            title,
+            text: content,
+            author: isAnon ? "Anonymous" : auth.user.name,
+            authorId: isAnon ? null : auth.user._id,
+          },
+        },
+        {
+          headers: {
+            token: auth.token,
+          },
+        }
+      );
       setShowModal(true);
       setTitle("");
       setContent("");
@@ -81,10 +96,13 @@ function UploadPage(props) {
     );
   }
 
+  if (!auth) {
+    return <Redirect to="/login"></Redirect>;
+  }
+
   return (
     <section className={styles["page"]}>
       <ToastContainer />
-      {auth && <Redirect to="/login" />}
       <UploadForm
         onSubmit={submitHandler}
         onTitleChange={titleHandler}

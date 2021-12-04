@@ -84,8 +84,6 @@ exports.activationController = (req, res) => {
         });
       } else {
         const { name, email, password } = jwt.decode(token);
-
-        console.log(email);
         const user = new User({
           name,
           email,
@@ -143,6 +141,7 @@ exports.signinController = (req, res) => {
       const token = jwt.sign(
         {
           _id: user._id,
+          role: user.role,
         },
         process.env.JWT_SECRET,
         {

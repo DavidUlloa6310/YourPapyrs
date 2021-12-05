@@ -11,7 +11,7 @@ function PiecesSection(props) {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch(getLink() + "/pieces");
+        const response = await fetch(`${getLink()}/pieces`);
         const data = await response.json();
         if (response.ok) {
           setPiecesData(data.data.piece);

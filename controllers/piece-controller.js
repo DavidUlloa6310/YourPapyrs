@@ -23,14 +23,14 @@ exports.getPieces = async (req, res) => {
 exports.getPiece = async (req, res) => {
   try {
     const piece = await Piece.findById(req.params.pieceId);
-    res.status(400).json({
+    res.status(200).json({
       status: "success",
       data: {
         piece,
       },
     });
   } catch (err) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "fail",
       message: `${err}`,
     });

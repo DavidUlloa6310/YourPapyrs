@@ -16,7 +16,12 @@ const pieceSchema = mongoose.Schema(
     },
     authorId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      default: null,
+    },
+
+    likes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
     },
   },
   { timeStamp: true }

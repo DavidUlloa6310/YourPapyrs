@@ -21,22 +21,31 @@ function PiecePage(props) {
 
   const headers = {
     "content-type": "application/json",
-    token: auth.token,
+    token: auth ? auth.token : null,
   };
 
-  function findIsLiked() {
-    let found = false;
+  function canLike() {
+    return auth !== undefined;
+  }
 
+  function findIsLiked() {
     if (auth) {
-      auth.user.likedPieces.forEach((element) => {
-        if (element + "" === id) {
-          found = true;
-          return;
-        }
-      });
-      if (found) return true;
+      axios
+        .get(`${getLink()}/users/${auth.user._id}/likedPieces`, {
+          headers: headers,
+        })
+        .then((response) => {
+          response.data.likedPieces.forEach((element) => {
+            if (element === id) {
+              setIsLiked(true);
+              return true;
+            }
+          });
+        });
+      setIsLiked(false);
       return false;
     } else {
+      setIsLiked(false);
       return false;
     }
   }
@@ -57,48 +66,45 @@ function PiecePage(props) {
     return piece.authorId === auth.user._id;
   }
 
-  const [isLiked, setIsLiked] = useState(findIsLiked());
+  const [isLiked, setIsLiked] = useState(false);
   const [redirect, setRedirect] = useState();
 
   useEffect(() => {
-    fetch(`${getLink()}/pieces/${id}`, {
-      headers: headers,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setPiece(data.data.piece);
-        return data;
-      })
-      .finally(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        let response = await fetch(`${getLink()}/pieces/${id}`);
+        response = await response.json();
+        setPiece(response.data.piece);
+        findIsLiked();
         setLoading(false);
-      });
-    // console.log(
-    //   (auth && auth.user.role === "admin") || piece.autherId === auth.user._id
-    // );
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+
+    fetchData();
   }, []);
 
-  function likeHandler() {
+  async function likeHandler() {
     if (isLiked) {
       setIsLiked(false);
-      const index = auth.user.likedPieces.indexOf(id);
-      if (index > -1) {
-        auth.user.likedPieces.splice(index, 1);
-      }
+      await axios.delete(`${getLink()}/users/${auth.user._id}/likedPiece`, {
+        headers: headers,
+        data: {
+          pieceId: piece._id,
+        },
+      });
     } else {
       setIsLiked(true);
-      auth.user.likedPieces.push(id);
+      await axios.put(
+        `${getLink()}/users/${auth.user._id}/likedPiece`,
+        { pieceId: piece._id },
+        {
+          headers: headers,
+        }
+      );
     }
-    axios.patch(
-      getLink() + `/users/${auth.user._id}`,
-      {
-        user: auth.user,
-      },
-      {
-        headers: {
-          token: process.env.REACT_APP_JWT_ADMIN_TOKEN,
-        },
-      }
-    );
   }
 
   async function deletePiece() {
@@ -140,7 +146,7 @@ function PiecePage(props) {
       ></Piece>
 
       <div className={styles["icons"]}>
-        {auth !== null && (
+        {canLike() && (
           <FaHeart
             size={30}
             onClick={likeHandler}

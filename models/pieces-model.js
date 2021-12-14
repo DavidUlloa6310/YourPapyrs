@@ -23,6 +23,11 @@ const pieceSchema = mongoose.Schema(
       type: [mongoose.Schema.Types.ObjectId],
       default: [],
     },
+
+    flags: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
+    },
   },
   { timeStamp: true }
 );

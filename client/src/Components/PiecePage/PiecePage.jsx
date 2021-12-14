@@ -8,7 +8,7 @@ import { getLink } from "../../helpers/link";
 
 import Piece from "../Shared/Piece";
 
-import { FaHeart, FaTrashAlt } from "react-icons/fa";
+import { FaHeart, FaTrashAlt, FaFlag } from "react-icons/fa";
 
 import styles from "./PiecePage.module.css";
 
@@ -16,6 +16,9 @@ function PiecePage(props) {
   const id = useParams().pieceId;
   const [piece, setPiece] = useState();
   const [loading, setLoading] = useState(true);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isFlagged, setIsFlagged] = useState(false);
+  const [redirect, setRedirect] = useState();
 
   const { auth, setAuth } = useContext(AuthContext);
 
@@ -24,8 +27,30 @@ function PiecePage(props) {
     token: auth ? auth.token : null,
   };
 
-  function canLike() {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setPiece(await getPiece());
+        findIsLiked();
+        findIsFlagged();
+        setLoading(false);
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  function isSignedIn() {
     return auth !== undefined;
+  }
+
+  async function getPiece() {
+    let pieceResponse = await fetch(`${getLink()}/pieces/${id}`);
+    pieceResponse = await pieceResponse.json();
+    return pieceResponse.data.piece;
   }
 
   function findIsLiked() {
@@ -50,6 +75,28 @@ function PiecePage(props) {
     }
   }
 
+  function findIsFlagged() {
+    if (auth) {
+      axios
+        .get(`${getLink()}/users/${auth.user._id}/flaggedPieces`, {
+          headers: headers,
+        })
+        .then((response) => {
+          response.data.flaggedPieces.forEach((element) => {
+            if (element === id) {
+              setIsFlagged(true);
+              return true;
+            }
+          });
+        });
+      setIsFlagged(false);
+      return false;
+    } else {
+      setIsFlagged(false);
+      return false;
+    }
+  }
+
   function canDelete() {
     if (!auth) {
       return false;
@@ -66,26 +113,6 @@ function PiecePage(props) {
     return piece.authorId === auth.user._id;
   }
 
-  const [isLiked, setIsLiked] = useState(false);
-  const [redirect, setRedirect] = useState();
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        let response = await fetch(`${getLink()}/pieces/${id}`);
-        response = await response.json();
-        setPiece(response.data.piece);
-        findIsLiked();
-        setLoading(false);
-      } catch (error) {
-        console.log(error.response);
-      }
-    }
-
-    fetchData();
-  }, []);
-
   async function likeHandler() {
     if (isLiked) {
       setIsLiked(false);
@@ -99,6 +126,27 @@ function PiecePage(props) {
       setIsLiked(true);
       await axios.put(
         `${getLink()}/users/${auth.user._id}/likedPiece`,
+        { pieceId: piece._id },
+        {
+          headers: headers,
+        }
+      );
+    }
+  }
+
+  async function flagHandler() {
+    if (isFlagged) {
+      setIsFlagged(false);
+      await axios.delete(`${getLink()}/users/${auth.user._id}/flaggedPiece`, {
+        headers: headers,
+        data: {
+          pieceId: piece._id,
+        },
+      });
+    } else {
+      setIsFlagged(true);
+      await axios.put(
+        `${getLink()}/users/${auth.user._id}/flaggedPiece`,
         { pieceId: piece._id },
         {
           headers: headers,
@@ -146,14 +194,17 @@ function PiecePage(props) {
       ></Piece>
 
       <div className={styles["icons"]}>
-        {canLike() && (
-          <FaHeart
-            size={30}
-            onClick={likeHandler}
-            className={`${isLiked ? styles["liked"] : styles["not-liked"]} ${
-              styles["icon"]
-            }`}
-          ></FaHeart>
+        {isSignedIn() && (
+          <div className={styles["like-box"]}>
+            <FaHeart
+              size={30}
+              onClick={likeHandler}
+              className={`${isLiked ? styles["liked"] : styles["not-liked"]} ${
+                styles["icon"]
+              }`}
+            ></FaHeart>
+            <p>{piece.likes.length}</p>
+          </div>
         )}
         {canDelete() && (
           <FaTrashAlt
@@ -161,6 +212,16 @@ function PiecePage(props) {
             className={styles["icon"]}
             onClick={deletePiece}
           ></FaTrashAlt>
+        )}
+
+        {isSignedIn() && (
+          <FaFlag
+            size={30}
+            className={`${styles["icon"]} ${
+              isFlagged ? styles["flagged"] : styles["not-flagged"]
+            }`}
+            onClick={flagHandler}
+          ></FaFlag>
         )}
       </div>
     </section>

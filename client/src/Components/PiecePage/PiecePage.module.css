@@ -39,3 +39,21 @@
   color: black;
   cursor: pointer;
 }
+
+.like-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(10px);
+}
+
+.flagged {
+  color: goldenrod;
+  cursor: pointer;
+}
+
+.not-flagged {
+  color: black;
+  cursor: pointer;
+}

@@ -28,8 +28,18 @@ const userScheama = new mongoose.Schema(
       data: String,
       default: "",
     },
-    publishedPieces: [mongoose.Types.ObjectId],
-    likedPieces: [mongoose.Types.ObjectId],
+    publishedPieces: {
+      type: [mongoose.Types.ObjectId],
+      default: [],
+    },
+    likedPieces: {
+      type: [mongoose.Types.ObjectId],
+      default: [],
+    },
+    flaggedPieces: {
+      type: [mongoose.Types.ObjectId],
+      default: [],
+    },
   },
   {
     timestamps: true,

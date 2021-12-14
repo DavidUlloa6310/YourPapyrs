@@ -19,12 +19,41 @@
   align-items: center;
 }
 
+.icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin: 10px;
+}
+
 .liked {
   color: red;
   cursor: pointer;
 }
 
 .not-liked {
+  color: black;
+  cursor: pointer;
+}
+
+.like-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(10px);
+}
+
+.flagged {
+  color: goldenrod;
+  cursor: pointer;
+}
+
+.not-flagged {
   color: black;
   cursor: pointer;
 }

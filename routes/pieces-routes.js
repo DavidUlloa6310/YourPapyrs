@@ -6,11 +6,14 @@ const {
   getPieces,
   getPiece,
   createPiece,
+  deletePiece,
 } = require("../controllers/piece-controller.js");
 
 router.get("/", getPieces);
 
 router.get("/:pieceId", getPiece);
+
+router.delete("/:pieceId", deletePiece);
 
 router.post("/", createPiece);
 

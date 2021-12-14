@@ -114,6 +114,10 @@ function PiecePage(props) {
   }
 
   async function likeHandler() {
+    if (!auth) {
+      return (window.location.href = "http://www.yourpapyrs.com/login");
+    }
+
     if (isLiked) {
       setIsLiked(false);
       await axios.delete(`${getLink()}/users/${auth.user._id}/likedPiece`, {
@@ -135,6 +139,10 @@ function PiecePage(props) {
   }
 
   async function flagHandler() {
+    if (!auth) {
+      return (window.location.href = "http://www.yourpapyrs.com/login");
+    }
+
     if (isFlagged) {
       setIsFlagged(false);
       await axios.delete(`${getLink()}/users/${auth.user._id}/flaggedPiece`, {
@@ -194,18 +202,16 @@ function PiecePage(props) {
       ></Piece>
 
       <div className={styles["icons"]}>
-        {isSignedIn() && (
-          <div className={styles["like-box"]}>
-            <FaHeart
-              size={30}
-              onClick={likeHandler}
-              className={`${isLiked ? styles["liked"] : styles["not-liked"]} ${
-                styles["icon"]
-              }`}
-            ></FaHeart>
-            <p>{piece.likes.length}</p>
-          </div>
-        )}
+        <div className={styles["like-box"]}>
+          <FaHeart
+            size={30}
+            onClick={likeHandler}
+            className={`${isLiked ? styles["liked"] : styles["not-liked"]} ${
+              styles["icon"]
+            }`}
+          ></FaHeart>
+          <p>{piece.likes.length}</p>
+        </div>
         {canDelete() && (
           <FaTrashAlt
             size={30}
@@ -214,15 +220,13 @@ function PiecePage(props) {
           ></FaTrashAlt>
         )}
 
-        {isSignedIn() && (
-          <FaFlag
-            size={30}
-            className={`${styles["icon"]} ${
-              isFlagged ? styles["flagged"] : styles["not-flagged"]
-            }`}
-            onClick={flagHandler}
-          ></FaFlag>
-        )}
+        <FaFlag
+          size={30}
+          className={`${styles["icon"]} ${
+            isFlagged ? styles["flagged"] : styles["not-flagged"]
+          }`}
+          onClick={flagHandler}
+        ></FaFlag>
       </div>
     </section>
   );

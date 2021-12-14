@@ -1,0 +1,33 @@
+.activate-section {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.activate-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  margin: 20px;
+  height: 5px;
+  width: 100%;
+  background-color: black;
+  border: none;
+}
+
+.button {
+  width: 200px;
+  height: 50px;
+  outline: none;
+  border: 2px solid black;
+  background-color: black;
+  color: white;
+  font-family: "Merriweather", sans-serif;
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PiecesList from "./PiecesList";
+import { getLink } from "../../helpers/link";
 
 import styles from "./PiecesSection.module.css";
 
@@ -10,13 +11,7 @@ function PiecesSection(props) {
   useEffect(() => {
     async function getData() {
       try {
-        let apiURL;
-        if (process.env.REACT_APP_DEVELOPMENT) {
-          apiURL = "http://localhost:5000/api/v1/pieces";
-        } else {
-          apiURL = `https://www.yourpapyrs.com/api/v1/pieces`;
-        }
-        const response = await fetch(apiURL);
+        const response = await fetch(`${getLink()}/pieces`);
         const data = await response.json();
         if (response.ok) {
           setPiecesData(data.data.piece);

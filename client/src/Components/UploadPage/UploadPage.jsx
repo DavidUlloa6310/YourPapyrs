@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import Piece from "../Shared/Piece";
 import Card from "../Shared/UI/Card";
 import Modal from "../Shared/UI/Modal";
-
 import UploadForm from "./UploadForm";
+import { getLink } from "../../helpers/link";
+import { Redirect } from "react-router";
 
 import styles from "./UploadPage.module.css";
+import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../../helpers/AuthContext";
 
 function UploadPage(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
   const [isAnon, setIsAnon] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
@@ -20,30 +23,38 @@ function UploadPage(props) {
 
   const [textStyles, setTextStyles] = useState({});
 
-  async function submitHandler(data) {
-    setLoading(true);
-    try {
-      let apiURL;
-      if (process.env.REACT_APP_DEVELOPMENT) {
-        apiURL = "http://localhost:5000/api/v1/pieces";
-      } else {
-        apiURL = `https://www.yourpapyrs.com/api/v1/pieces`;
-      }
+  const { auth, setAuth } = useContext(AuthContext);
 
-      const response = await fetch(apiURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  async function submitHandler(event) {
+    event.preventDefault();
+
+    if (!title || !content) {
+      return toast.error(
+        "You must include the text of your piece and its title."
+      );
+    }
+
+    try {
+      setLoading(true);
+      await axios.post(
+        getLink() + "/pieces",
+        {
+          userId: auth.user._id,
+          piece: {
+            title,
+            text: content,
+            author: isAnon ? "Anonymous" : auth.user.name,
+            authorId: isAnon ? null : auth.user._id,
+          },
         },
-        body: JSON.stringify({
-          title: title,
-          text: content,
-          author: isAnon || author === "" ? "Anonymous" : author,
-        }),
-      });
+        {
+          headers: {
+            token: auth.token,
+          },
+        }
+      );
       setShowModal(true);
       setTitle("");
-      setAuthor("");
       setContent("");
       setIsAnon(false);
     } catch (err) {
@@ -63,10 +74,6 @@ function UploadPage(props) {
 
   function titleHandler(event) {
     setTitle(event.target.value);
-  }
-
-  function authorHandler(event) {
-    setAuthor(event.target.value);
   }
 
   function contentHandler(event) {
@@ -89,23 +96,26 @@ function UploadPage(props) {
     );
   }
 
+  if (!auth) {
+    return <Redirect to="/login"></Redirect>;
+  }
+
   return (
     <section className={styles["page"]}>
+      <ToastContainer />
       <UploadForm
         onSubmit={submitHandler}
         onTitleChange={titleHandler}
         onContentChange={contentHandler}
-        onAuthorChange={authorHandler}
         updateStyles={updateStyles}
         content={content}
         title={title}
-        author={author}
         toggleAnon={anonHandler}
       ></UploadForm>
       <Card className={styles["card"]}>
         <Piece
           content={content}
-          author={isAnon || author === "" ? "Anonymous" : author}
+          author={isAnon ? "Anonymous" : auth.user.name}
           title={title}
           textStyle={textStyles}
         ></Piece>

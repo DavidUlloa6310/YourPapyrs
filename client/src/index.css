@@ -9,6 +9,10 @@ h2 {
   font-size: 2em;
 }
 
+p {
+  font-family: "Merriweather", serif;
+}
+
 .slide-in-left-enter {
   transform: translateX(-100%);
 }

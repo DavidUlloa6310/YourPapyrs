@@ -18,6 +18,8 @@
 .navbar ul {
   list-style: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar ul li {
@@ -43,12 +45,41 @@
   background-color: white;
 }
 
-@media (max-width: 767px) {
+.button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Merriweather";
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.light-button {
+  background-color: white;
+  border: 1px solid black;
+  width: 150px;
+}
+
+.dark-button {
+  color: white;
+  background-color: #191919;
+  border: 1px solid white;
+  width: 150px;
+}
+
+@media (max-width: 1024px) {
   .burger {
     display: flex;
   }
 
   .navbar ul li {
+    display: none;
+  }
+
+  .button {
     display: none;
   }
 }

@@ -12,12 +12,6 @@ import { useForm } from "react-hook-form";
 import styles from "./UploadForm.module.css";
 
 function UploadForm(props) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   const [textStyles, setTextStyles] = useState({});
 
   function alignCenterClick() {
@@ -57,44 +51,23 @@ function UploadForm(props) {
   }, [textStyles]);
 
   return (
-    <form onSubmit={handleSubmit(props.onSubmit)} className={styles["form"]}>
+    <form onSubmit={props.onSubmit} className={styles["form"]}>
       <div className={styles["input-div"]}>
         <label>Title</label>
         <input
           type="text"
-          {...register("title", { required: true })}
           onChange={props.onTitleChange}
           value={props.title}
         ></input>
-        {errors.title && (
-          <p className={styles["error"]}>You must include a title</p>
-        )}
       </div>
       <div className={styles["input-div"]}>
         <label>Text of Piece</label>
         <textarea
           rows={15}
           cols={40}
-          {...register("piece_text", { required: true })}
           onChange={props.onContentChange}
           value={props.content}
         ></textarea>
-        {errors.piece_text && (
-          <p className={styles["error"]}>You must include some text</p>
-        )}
-      </div>
-
-      <div className={styles["input-div"]}>
-        <label>Name of Author</label>
-        <input
-          type="text"
-          {...register("author")}
-          onChange={props.onAuthorChange}
-          value={props.author}
-        ></input>
-        {errors.title && (
-          <p className={styles["error"]}>You must include a title</p>
-        )}
       </div>
 
       <div className={styles["align-btns"]}>

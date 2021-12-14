@@ -6,7 +6,5 @@ export function getLink() {
   // } else {
   //   apiURL = `${process.env.REACT_APP_PRODUCTION_URL}/api/v1`;
   // }
-
-  console.log(apiURL);
   return apiURL;
 }

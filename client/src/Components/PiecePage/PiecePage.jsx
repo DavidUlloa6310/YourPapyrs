@@ -32,13 +32,14 @@ function PiecePage(props) {
     async function fetchData() {
       try {
         setLoading(true);
-        setPiece(await getPiece());
+        let piece = await getPiece();
+        setPiece(piece);
+        setPieceLikes(piece.likes.length);
         findIsLiked();
         findIsFlagged();
-        setPieceLikes(piece.likes.length);
         setLoading(false);
       } catch (error) {
-        console.log(error.response);
+        console.log(error);
       }
     }
 

@@ -15,6 +15,7 @@ import styles from "./PiecePage.module.css";
 function PiecePage(props) {
   const id = useParams().pieceId;
   const [piece, setPiece] = useState();
+  const [pieceLikes, setPieceLikes] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
   const [isFlagged, setIsFlagged] = useState(false);
@@ -34,6 +35,7 @@ function PiecePage(props) {
         setPiece(await getPiece());
         findIsLiked();
         findIsFlagged();
+        setPieceLikes(piece.likes.length);
         setLoading(false);
       } catch (error) {
         console.log(error.response);
@@ -42,6 +44,14 @@ function PiecePage(props) {
 
     fetchData();
   }, []);
+
+  function incrementLike() {
+    setPieceLikes((prevState) => prevState + 1);
+  }
+
+  function decrementLikes() {
+    setPieceLikes((prevState) => prevState - 1);
+  }
 
   function isSignedIn() {
     return auth !== undefined;
@@ -120,6 +130,7 @@ function PiecePage(props) {
 
     if (isLiked) {
       setIsLiked(false);
+      decrementLikes();
       await axios.delete(`${getLink()}/users/${auth.user._id}/likedPiece`, {
         headers: headers,
         data: {
@@ -128,6 +139,7 @@ function PiecePage(props) {
       });
     } else {
       setIsLiked(true);
+      incrementLike();
       await axios.put(
         `${getLink()}/users/${auth.user._id}/likedPiece`,
         { pieceId: piece._id },
@@ -210,7 +222,7 @@ function PiecePage(props) {
               styles["icon"]
             }`}
           ></FaHeart>
-          <p>{piece.likes.length}</p>
+          <p>{pieceLikes}</p>
         </div>
         {canDelete() && (
           <FaTrashAlt

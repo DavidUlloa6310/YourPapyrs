@@ -26,6 +26,8 @@ function PiecesList(props) {
             title={item.title}
             key={item._id}
             id={item._id}
+            likes={item.likes.length}
+            flags={item.flags.length}
             // type={"Poem"}
           ></PieceCard>
         );

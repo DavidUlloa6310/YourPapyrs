@@ -35,19 +35,25 @@
   text-decoration: none;
 }
 
-.heart-button {
-  outline: none;
-  border: none;
-  border-radius: 100px;
-  padding: 5px;
-  padding-bottom: 1px;
-  background-color: white;
+.selected-icon {
+  color: red;
+}
 
+.heart,
+.flag {
+  color: black;
+}
+
+.heart-div {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: black;
+}
+
+.flag-div {
   position: absolute;
   bottom: 10px;
   left: 10px;
-}
-
-.selected-icon {
-  color: red;
+  color: black;
 }

@@ -10,8 +10,11 @@
   text-align: center;
 
   width: 250px;
+  max-width: 250px;
+  max-height: 300px;
 
   filter: drop-shadow(10px 5px 4px rgba(0, 0, 0, 0.5));
+  text-overflow: ellipsis;
 }
 
 .piece h1 {

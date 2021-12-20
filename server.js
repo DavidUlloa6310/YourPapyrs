@@ -14,7 +14,11 @@ connectDB();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://yourpapyrs.com", "http://localhost"],
+  })
+);
 
 //Load Routes
 const piecesRouter = require("./routes/pieces-routes.js");

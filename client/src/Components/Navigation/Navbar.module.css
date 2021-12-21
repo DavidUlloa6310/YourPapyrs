@@ -3,9 +3,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #222;
   padding: 20px;
   z-index: 10;
+}
+
+.navbar img {
+  width: 75px;
+  cursor: pointer;
 }
 
 .navbar h1 {

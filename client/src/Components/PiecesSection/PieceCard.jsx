@@ -18,17 +18,18 @@ function Piece(props) {
           <h2>By {props.author}</h2>
         </div>
         {/* {props.id} */}
-        <h2>{props.type}</h2>
-        <div className={styles["heart-div"]}>
-          <FaHeart size={25} className={styles["heart"]}></FaHeart>
-          <p>{props.likes}</p>
-        </div>
-        {auth && auth.user.role === "admin" && (
-          <div className={styles["flag-div"]}>
-            <FaFlag size={25} className={styles["flag"]}></FaFlag>
-            <p>{props.flags}</p>
+        <div className={styles["icon-div"]}>
+          <div className={styles["heart-div"]}>
+            <FaHeart size={25} className={styles["heart"]}></FaHeart>
+            <p>{props.likes}</p>
           </div>
-        )}
+          {auth && auth.user.role === "admin" && (
+            <div className={styles["flag-div"]}>
+              <FaFlag size={25} className={styles["flag"]}></FaFlag>
+              <p>{props.flags}</p>
+            </div>
+          )}
+        </div>
       </Card>
     </Link>
   );

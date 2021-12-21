@@ -1,12 +1,8 @@
-h1 {
-  font-family: "Special Elite", sans-serif;
-  font-weight: 100;
-  font-size: 5em;
-}
-
+h1,
 h2 {
-  font-family: "Merriweather", serif;
-  font-size: 2em;
+  text-transform: uppercase;
+  font-family: "Special Elite", sans-serif;
+  margin-bottom: 1em;
 }
 
 p {

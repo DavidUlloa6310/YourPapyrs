@@ -1,11 +1,20 @@
+:root {
+  --primary-color: white;
+  --secondary-color: black;
+  --tertiary-color: #222c;
+}
+
 .piece {
-  background-color: white;
-  border: 5px solid rgba(0, 0, 0, 0.83);
+  background-color: var(--primary-color);
+  border-color: var(--secondary-color) !important;
+  border: 2px solid;
+  border-bottom: solid 5px;
+  border-right: solid 7px;
 
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
 
@@ -17,18 +26,30 @@
   text-overflow: ellipsis;
 }
 
+.piece:hover {
+  transform: scale(1.1);
+}
+
 .piece h1 {
-  font-size: 2rem;
-  text-decoration: underline;
+  margin: 0;
+  font-size: 1.25em;
+  line-height: 1.45em;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 0.5em;
 }
 
 .piece h2 {
-  font-size: 2rem;
+  color: var(--tertiary-color);
+  font-size: 0.8em;
+  font-weight: 100;
+  font-family: "Special Elite", sans-serif;
 }
 
 .piece h1,
 .piece h2 {
-  color: rgba(0, 0, 0, 0.83);
+  color: var(--tertiary-color);
 }
 
 .link-style {
@@ -41,19 +62,34 @@
 
 .heart,
 .flag {
-  color: black;
+  color: var(--secondary-color);
+}
+
+.icon-div {
+  position: initial;
+  display: flex;
+  flex-direction: row;
+  color: var(--tertiary-color);
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid var(--secondary-color);
+  padding-top: 0.5em;
+  width: 100%;
+  font-size: 1em;
+  font-weight: 800px;
 }
 
 .heart-div {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: black;
+  display: flex;
+  flex-direction: column;
 }
 
 .flag-div {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.heart-div,
+.flag-div {
+  padding: 10px;
 }

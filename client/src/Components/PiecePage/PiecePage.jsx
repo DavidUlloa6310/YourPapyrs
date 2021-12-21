@@ -209,9 +209,6 @@ function PiecePage(props) {
         title={piece.title}
         author={piece.author}
         content={piece.text}
-        textStyle={{
-          textAlign: "center",
-        }}
       ></Piece>
 
       <div className={styles["icons"]}>

@@ -12,7 +12,6 @@ function IntroSection(props) {
           <h1>Your Papyrs</h1>
           <h2>Your stories, Your poems. Upload your writing.</h2>
         </article>
-        <img className={styles["IntroWordArt"]} src={wordArt} alt="Book"></img>
       </div>
 
       <div className={styles["custom-shape-divider-bottom-1634099041"]}>

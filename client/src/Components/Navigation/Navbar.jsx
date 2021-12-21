@@ -9,6 +9,8 @@ import NavLinks from "./NavLinks";
 import styles from "./Navbar.module.css";
 import { AuthContext } from "../../helpers/AuthContext";
 
+import book from "../../assets/book.png";
+
 function Navbar(props) {
   const [burgerState, setBurgerState] = useState(false);
 
@@ -24,14 +26,10 @@ function Navbar(props) {
         <NavLinks />
       </Drawer>
       {burgerState && <Backdrop onClick={burgerStateHandler}></Backdrop>}
-      <Link to="/" className={styles["link"]}>
-        <h1>Your Papyrs</h1>
+      <Link to="/">
+        <img src={book} alt="Book Icon"></img>
       </Link>
       <ul>
-        <Link to="/" className={styles["link"]}>
-          <li>Find Writting</li>
-        </Link>
-
         <Link to="/upload" className={styles["link"]}>
           <li>Submit Writing</li>
         </Link>

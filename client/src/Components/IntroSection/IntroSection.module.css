@@ -1,6 +1,7 @@
 .IntroSection {
+  padding: 20px;
   background-color: rgba(0, 0, 0, 0.83);
-  height: 100vh;
+  height: 60vh;
   position: relative;
 }
 
@@ -12,7 +13,7 @@
   align-items: center;
   padding: 0 10%;
 
-  height: 80vh;
+  height: 40vh;
 }
 
 .IntroWordArt {
@@ -23,6 +24,7 @@
 .IntroArticle h1,
 h2 {
   color: white;
+  text-align: center;
 }
 
 .IntroArticle h1 {
@@ -34,13 +36,6 @@ h2 {
 .IntroArticle h2 {
   font-family: "Merriweather", serif;
   font-size: 2em;
-}
-
-@media screen and (max-width: 1024px) {
-  .IntroDiv h1,
-  h2 {
-    text-align: center;
-  }
 }
 
 .custom-shape-divider-bottom-1634099041 {

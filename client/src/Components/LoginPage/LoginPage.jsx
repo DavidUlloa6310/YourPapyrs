@@ -55,6 +55,16 @@ function LoginPage(props) {
           email={username}
           password={password}
         ></LoginForm>
+        <hr className={styles["horizontal-rule"]} />
+        <h2>
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            style={{ textDecoration: "underline", color: "black" }}
+          >
+            Sign Up
+          </Link>
+        </h2>
       </Card>
       <ToastContainer></ToastContainer>
     </section>

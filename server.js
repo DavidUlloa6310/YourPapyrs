@@ -12,13 +12,16 @@ const app = express();
 //Connect to DataBase
 connectDB();
 
-app.use(express.json());
-
 app.use(
   cors({
-    origin: ["http://yourpapyrs.com", "http://localhost"],
+    origin: [
+      "http://yourpapyrs.com",
+      "https://yourpapyrs.com",
+      "http://localhost:3000",
+    ],
   })
 );
+app.use(express.json());
 
 //Load Routes
 const piecesRouter = require("./routes/pieces-routes.js");

@@ -12,15 +12,7 @@ const app = express();
 //Connect to DataBase
 connectDB();
 
-app.use(
-  cors({
-    origin: [
-      "http://yourpapyrs.com",
-      "https://yourpapyrs.com",
-      "http://localhost:3000",
-    ],
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 //Load Routes
